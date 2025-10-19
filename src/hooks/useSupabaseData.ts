@@ -12,6 +12,14 @@ export interface Event {
   image: string;
 }
 
+export interface Member {
+  id: string;
+  name: string;
+  role: string;
+  image_url: string;
+  type: 'faculty' | 'student'; // Added type field
+}
+
 export interface ClubSettings {
   join_form_link: string;
   contact_email: string;
@@ -25,6 +33,7 @@ export interface ClubSettings {
 
 interface SupabaseData {
   events: Event[];
+  members: Member[];
   clubSettings: ClubSettings | null;
   loading: boolean;
   error: string | null;
@@ -32,6 +41,7 @@ interface SupabaseData {
 
 export const useSupabaseData = (): SupabaseData => {
   const [events, setEvents] = useState<Event[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [clubSettings, setClubSettings] = useState<ClubSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -50,13 +60,21 @@ export const useSupabaseData = (): SupabaseData => {
         if (eventsError) throw eventsError;
         setEvents(eventsData || []);
 
+        // Fetch members, including the new 'type' column
+        const { data: membersData, error: membersError } = await supabase
+          .from('members')
+          .select('id, name, role, image_url, type') // Select 'type'
+          .order('name', { ascending: true });
+
+        if (membersError) throw membersError;
+        setMembers(membersData || []);
+
         // Fetch club settings
         const { data: settingsData, error: settingsError } = await supabase
           .from('club_settings')
           .select('*')
-          .single(); // Assuming only one row for club settings
+          .single();
 
-        // Supabase returns error code 'PGRST116' if no rows found for .single()
         if (settingsError && settingsError.code !== 'PGRST116') {
           throw settingsError;
         }
@@ -73,8 +91,6 @@ export const useSupabaseData = (): SupabaseData => {
             },
           });
         } else {
-            // If no settings found (e.g., table just created and no default insert yet),
-            // provide empty defaults to prevent crashes.
             setClubSettings({
                 join_form_link: '',
                 contact_email: '',
@@ -94,5 +110,5 @@ export const useSupabaseData = (): SupabaseData => {
     fetchData();
   }, []);
 
-  return { events, clubSettings, loading, error };
+  return { events, members, clubSettings, loading, error };
 };

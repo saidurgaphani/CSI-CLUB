@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import EventsPage from './pages/EventsPage';
 import JoinPage from './pages/JoinPage';
 import ContactPage from './pages/ContactPage';
+import MembersPage from './pages/MembersPage'; // Import MembersPage
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/events" element={<EventsPage />} />
+              <Route path="/members" element={<MembersPage />} /> {/* Add MembersPage route */}
               <Route path="/join" element={<JoinPage />} />
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
