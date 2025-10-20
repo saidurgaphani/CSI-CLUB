@@ -127,7 +127,7 @@ const ContactPage: React.FC = () => {
             <h2 className="text-3xl font-bold text-text mb-6">Our Location</h2>
             <div className="aspect-video w-full rounded-xl overflow-hidden border border-border">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.710509339428!2d144.9630579153161!3d-37.81362797975168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce7e0!2sMelbourne%20University!5e0!3m2!1sen!2sau!4v1678912345678!5m2!1sen!2sau"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3803.842911916916!2d78.4535264750557!3d17.56266419773235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8f9e56c187c5%3A0x4ae6789c2b9c5baf!2sNarsimha%20Reddy%20Engineering%20College%20(NRCM)!5e0!3m2!1sen!2sin!4v1760937895084!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
