@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
     // Optionally render a minimal footer or null during loading/error
     return (
       <footer className="bg-surface text-textSecondary py-12 border-t border-border text-center">
-        <p>&copy; {new Date().getFullYear()} CSI Club. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} CSI Club NRCM. All rights reserved.</p>
       </footer>
     );
   }
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 text-center mt-10 pt-8 border-t border-border text-sm">
-        <p>&copy; {new Date().getFullYear()} CSI Club. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} CSI Club NRCM. All rights reserved.</p>
       </div>
     </motion.footer>
   );
