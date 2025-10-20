@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Mail, Phone, Laptop } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone, Laptop, MessageSquare } from 'lucide-react';
 import { navLinks } from '../constants';
 import { motion } from 'framer-motion';
 import { useSupabaseData } from '../hooks/useSupabaseData';
@@ -64,8 +64,11 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="flex gap-4">
-            <a href={clubSettings?.social_media.facebook || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
+            {/* <a href={clubSettings?.social_media.facebook || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
               <Facebook size={24} />
+            </a> */}
+            <a href={clubSettings?.social_media.whatsapp || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
+              <MessageSquare size={24} />
             </a>
             <a href={clubSettings?.social_media.instagram || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
               <Instagram size={24} />
@@ -73,6 +76,8 @@ const Footer: React.FC = () => {
             <a href={clubSettings?.social_media.linkedin || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
               <Linkedin size={24} />
             </a>
+            
+
           </div>
         </div>
       </div>

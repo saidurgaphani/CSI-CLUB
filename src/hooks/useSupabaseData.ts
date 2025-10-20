@@ -28,6 +28,7 @@ export interface ClubSettings {
     facebook: string;
     instagram: string;
     linkedin: string;
+    whatsapp: string;
   };
 }
 
@@ -88,6 +89,7 @@ export const useSupabaseData = (): SupabaseData => {
               facebook: settingsData.social_media_facebook || '',
               instagram: settingsData.social_media_instagram || '',
               linkedin: settingsData.social_media_linkedin || '',
+              whatsapp: settingsData.social_media_whatsapp || '',
             },
           });
         } else {
@@ -95,7 +97,7 @@ export const useSupabaseData = (): SupabaseData => {
                 join_form_link: '',
                 contact_email: '',
                 phone_number: '',
-                social_media: { facebook: '', instagram: '', linkedin: '' },
+                social_media: { facebook: '', instagram: '', linkedin: '', whatsapp: '' },
             });
         }
 

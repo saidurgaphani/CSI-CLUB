@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, Facebook, Instagram, Linkedin, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSupabaseData } from '../hooks/useSupabaseData';
 
@@ -102,8 +102,12 @@ const ContactPage: React.FC = () => {
               <div className="flex items-center gap-4">
                 <h3 className="text-xl font-semibold text-text">Follow Us</h3>
                 <div className="flex gap-4 ml-auto">
-                  <a href={clubSettings?.social_media.facebook || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
+
+                  {/* <a href={clubSettings?.social_media.facebook || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
                     <Facebook size={28} />
+                  </a> */}
+                  <a href={clubSettings?.social_media.whatsapp || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
+                    <MessageSquare size={28} />
                   </a>
                   <a href={clubSettings?.social_media.instagram || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
                     <Instagram size={28} />
@@ -111,6 +115,8 @@ const ContactPage: React.FC = () => {
                   <a href={clubSettings?.social_media.linkedin || '#'} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors duration-300">
                     <Linkedin size={28} />
                   </a>
+                  
+
                 </div>
               </div>
             </div>
