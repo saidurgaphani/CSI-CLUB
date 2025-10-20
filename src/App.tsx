@@ -8,6 +8,7 @@ import JoinPage from './pages/JoinPage';
 import ContactPage from './pages/ContactPage';
 import MembersPage from './pages/MembersPage'; // Import MembersPage
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           </AnimatePresence>
         </main>
         <Footer />
+        <Analytics />
       </div>
     </Router>
   );
