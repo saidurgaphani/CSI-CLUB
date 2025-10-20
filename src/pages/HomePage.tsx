@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-background text-text pt-24"
+      className="min-h-screen bg-background text-text pt-14"
     >
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">

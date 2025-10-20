@@ -8,7 +8,8 @@ import ContactPage from './pages/ContactPage';
 import MembersPage from './pages/MembersPage'; // Import MembersPage
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
-import AnimatedRoutes from "./components/AnimatedRoutes";
+// import AnimatedRoutes from "./components/AnimatedRoutes";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        <AnimatedRoutes />
+        <ScrollToTop /> 
         <Footer />
         <Analytics />
       </div>

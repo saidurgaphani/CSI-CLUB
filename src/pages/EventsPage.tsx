@@ -35,7 +35,7 @@ const EventsPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background text-text pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-background text-text pt-14 flex items-center justify-center">
         <p className="text-xl text-textSecondary">Loading events...</p>
       </div>
     );
@@ -43,7 +43,7 @@ const EventsPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background text-text pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-background text-text pt-14 flex items-center justify-center">
         <p className="text-xl text-error">Error: {error}</p>
       </div>
     );
@@ -54,7 +54,7 @@ const EventsPage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-background text-text pt-24 pb-16"
+      className="min-h-screen bg-background text-text pt-14 pb-16"
     >
       {/* Hero Section */}
       <motion.section

@@ -23,7 +23,7 @@ const MembersPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background text-text pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-background text-text pt-14 flex items-center justify-center">
         <p className="text-xl text-textSecondary">Loading club members...</p>
       </div>
     );
@@ -31,7 +31,7 @@ const MembersPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background text-text pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-background text-text pt-14 flex items-center justify-center">
         <p className="text-xl text-error">Error: {error}</p>
       </div>
     );
@@ -45,7 +45,7 @@ const MembersPage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-background text-text pt-24"
+      className="min-h-screen bg-background text-text pt-14"
     >
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center text-center overflow-hidden">
