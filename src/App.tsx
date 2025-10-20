@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,6 +8,7 @@ import ContactPage from './pages/ContactPage';
 import MembersPage from './pages/MembersPage'; // Import MembersPage
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
+import AnimatedRoutes from "./components/AnimatedRoutes";
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
             </Routes>
           </AnimatePresence>
         </main>
+        <AnimatedRoutes />
         <Footer />
         <Analytics />
       </div>
