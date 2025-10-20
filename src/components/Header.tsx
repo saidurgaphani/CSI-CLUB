@@ -34,7 +34,7 @@ const Header: React.FC = () => {
           <span className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
             CSI
           </span>
-          <span className="text-xl font-semibold text-textSecondary hidden sm:block">Club</span>
+          <span className="text-xl font-semibold text-textSecondary sm:block">Club</span>
         </Link>
 
         {/* Desktop Navigation */}
