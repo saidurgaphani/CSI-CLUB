@@ -24,7 +24,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-2">
-          <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">View Profile</span>
+          <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </div>
       </div>
       <h3 className="text-2xl font-bold text-text mb-2 group-hover:text-primary transition-colors duration-300">
