@@ -8,8 +8,8 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #171717; /* Ensure background color matches theme */
-  color: #FFFFFF; /* Ensure default text color matches theme */
+  background-color: #f9fafb; /* Ensure background color matches theme */
+  color: #1e293b; /* Ensure default text color matches theme */
 }
 
 /* Custom scrollbar for a sleek look */
@@ -18,16 +18,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #262626; /* surface color */
+  background: #ffffff; /* surface color */
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #9E7FFF; /* primary color */
+  background: #6366f1; /* primary color */
   border-radius: 10px;
   transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8; /* secondary color on hover */
+  background: #a5b4fc; /* secondary color on hover */
 }

@@ -1,17 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import EventCard from '../components/EventCard';
 import { motion } from 'framer-motion';
-import { useSupabaseData } from '../hooks/useSupabaseData';
+import { supabase } from '../supabaseClient';
 
 const HomePage: React.FC = () => {
-  const { events, clubSettings, loading, error } = useSupabaseData();
+  const [events, setEvents] = useState([]);
+  const [clubSettings, setClubSettings] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const { data: eventsData, error: eventsError } = await supabase
+          .from('events')
+          .select('*')
+          .order('date', { ascending: true });
+
+        if (eventsError) throw eventsError;
+        setEvents(eventsData || []);
+
+        const { data: settingsData, error: settingsError } = await supabase
+          .from('club_settings')
+          .select('*')
+          .single();
+
+        if (settingsError && settingsError.code !== 'PGRST116') {
+          throw settingsError;
+        }
+
+        if (settingsData) {
+          setClubSettings({
+            join_form_link: settingsData.join_form_link || '',
+            contact_email: settingsData.contact_email || '',
+            phone_number: settingsData.phone_number || '',
+            social_media: {
+              facebook: settingsData.social_media_facebook || '',
+              instagram: settingsData.social_media_instagram || '',
+              linkedin: settingsData.social_media_linkedin || '',
+              whatsapp: settingsData.social_media_whatsapp || '',
+            },
+          });
+        } else {
+          setClubSettings({
+            join_form_link: '',
+            contact_email: '',
+            phone_number: '',
+            social_media: { facebook: '', instagram: '', linkedin: '', whatsapp: '' },
+          });
+        }
+      } catch (err: any) {
+        console.error('Error fetching data:', err.message);
+        setError(err.message || 'An unknown error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const upcomingEvents = events
     .filter(event => event.status === 'upcoming')
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .slice(0, 3); // Show top 3 upcoming events
+    .slice(0, 3);
 
   const containerVariants = {
     hidden: { opacity: 0 },
