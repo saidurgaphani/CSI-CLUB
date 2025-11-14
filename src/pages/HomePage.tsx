@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { supabase } from '../supabaseClient';
 import { useInView } from 'react-intersection-observer';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { HeroScrollDemo } from '../components/HeroScrollDemo';
 
 const HomePage: React.FC = () => {
   const [events, setEvents] = useState([]);
@@ -110,52 +111,7 @@ const HomePage: React.FC = () => {
       variants={containerVariants}
       className="min-h-screen bg-gradient-to-b from-background to-surface text-text pt-14"
     >
-      {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">
-        <img
-          src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="CSI Club Hero"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
-        <div className="relative z-10 p-4 max-w-4xl mx-auto">
-          <motion.h1
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-6xl md:text-8xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
-          >
-            Innovate. Connect. Inspire.
-          </motion.h1>
-          <motion.p
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="text-textSecondary text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
-          >
-            Your gateway to the world of Computer Science and Information Technology.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="flex flex-col sm:flex-row justify-center gap-6"
-          >
-            <Link
-              to="/join"
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl text-lg shadow-lg hover:bg-primary/80 transition-all duration-300 transform hover:scale-105 hover:shadow-primary/50"
-            >
-              Join Now <ArrowRight className="ml-2" size={20} />
-            </Link>
-            <Link
-              to="/events"
-              className="inline-flex items-center justify-center px-8 py-4 bg-surface text-primary font-bold rounded-xl text-lg shadow-lg hover:bg-surface/80 border border-primary hover:border-primary/80 transition-all duration-300 transform hover:scale-105 hover:shadow-primary/20"
-            >
-              See Events <ArrowRight className="ml-2" size={20} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      <HeroScrollDemo />
 
       {/* About Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
