@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EventCard from '../components/EventCard';
 import { motion } from 'framer-motion';
 import { useSupabaseData } from '../hooks/useSupabaseData';
+import { Parallax, ParallaxImage, ParallaxSection } from '../components/Parallax';
 
 const EventsPage: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'past'>('upcoming');
@@ -61,35 +62,40 @@ const EventsPage: React.FC = () => {
         variants={itemVariants}
         className="relative h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-secondary/20 to-primary/20"
       >
-        <img
+        <ParallaxImage
           src="https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="Events Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          speed={0.8}
         />
-        <div className="absolute inset-0 bg-background/60"></div>
-        <div className="relative z-10 text-center">
-          <motion.h1
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent mb-4"
-          >
-            Our Events
-          </motion.h1>
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-textSecondary text-lg md:text-xl max-w-2xl mx-auto"
-          >
-            Explore our exciting lineup of upcoming workshops, competitions, and seminars, and relive memories from our past events.
-          </motion.p>
+        <div className="absolute inset-0 bg-background/60 z-10"></div>
+        <div className="relative z-20 text-center">
+          <Parallax speed={0.9} direction="up">
+            <motion.h1
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent mb-4"
+            >
+              Our Events
+            </motion.h1>
+          </Parallax>
+          <Parallax speed={0.7} direction="up">
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-textSecondary text-lg md:text-xl max-w-2xl mx-auto"
+            >
+              Explore our exciting lineup of upcoming workshops, competitions, and seminars, and relive memories from our past events.
+            </motion.p>
+          </Parallax>
         </div>
       </motion.section>
 
-      <div className="container mx-auto px-4 py-16">
+      <ParallaxSection className="container mx-auto px-4 py-16" speed={0.5}>
         {/* Filter Buttons */}
-        <motion.div variants={itemVariants} className="flex justify-center gap-4 mb-12">
+        <Parallax speed={0.6} direction="up">
+          <motion.div variants={itemVariants} className="flex justify-center gap-4 mb-12">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -126,13 +132,15 @@ const EventsPage: React.FC = () => {
           >
             All Events
           </motion.button>
-        </motion.div>
+          </motion.div>
+        </Parallax>
 
         {/* Event Grid */}
-        <motion.div
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <Parallax speed={0.8} direction="up">
+          <motion.div
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <EventCard key={event.id} event={event} />
@@ -142,8 +150,9 @@ const EventsPage: React.FC = () => {
               No {filter} events found at the moment. Check back soon!
             </motion.p>
           )}
-        </motion.div>
-      </div>
+          </motion.div>
+        </Parallax>
+      </ParallaxSection>
     </motion.div>
   );
 };
