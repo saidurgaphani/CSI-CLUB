@@ -6,58 +6,17 @@ import { motion } from 'framer-motion';
 import { supabase } from '../supabaseClient';
 import { useInView } from 'react-intersection-observer';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { HeroScrollDemo } from '../components/HeroScrollDemo';
+import { Hero } from '../components/Hero';
 
 const HomePage: React.FC = () => {
-  const [events, setEvents] = useState([]);
-  const [clubSettings, setClubSettings] = useState(null);
+  const [events, setEvents] = useState<any[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(false);
-  const [eventsError, setEventsError] = useState(null);
+  const [eventsError, setEventsError] = useState<string | null>(null);
 
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  useEffect(() => {
-    const fetchClubSettings = async () => {
-      try {
-        const { data: settingsData, error: settingsError } = await supabase
-          .from('club_settings')
-          .select('*')
-          .single();
-
-        if (settingsError && settingsError.code !== 'PGRST116') {
-          throw settingsError;
-        }
-
-        if (settingsData) {
-          setClubSettings({
-            join_form_link: settingsData.join_form_link || '',
-            contact_email: settingsData.contact_email || '',
-            phone_number: settingsData.phone_number || '',
-            social_media: {
-              facebook: settingsData.social_media_facebook || '',
-              instagram: settingsData.social_media_instagram || '',
-              linkedin: settingsData.social_media_linkedin || '',
-              whatsapp: settingsData.social_media_whatsapp || '',
-            },
-          });
-        } else {
-          setClubSettings({
-            join_form_link: '',
-            contact_email: '',
-            phone_number: '',
-            social_media: { facebook: '', instagram: '', linkedin: '', whatsapp: '' },
-          });
-        }
-      } catch (err: any) {
-        console.error('Error fetching club settings:', err.message);
-      }
-    };
-
-    fetchClubSettings();
-  }, []);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -109,9 +68,9 @@ const HomePage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-gradient-to-b from-background to-surface text-text pt-14"
+      className="min-h-screen bg-gradient-to-b from-background to-surface text-text"
     >
-      <HeroScrollDemo />
+      <Hero />
 
       {/* About Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
