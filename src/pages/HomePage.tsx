@@ -68,7 +68,7 @@ const HomePage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-gradient-to-b from-background to-surface text-text"
+      className="min-h-screen text-text"
     >
       <Hero />
 

@@ -93,15 +93,15 @@ export const Hero = () => {
               <TypeWriter strings={talkAbout} />
             </span>.
           </p>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4 mt-5">
             <Link to="/events">
-              <ShineBorder
+            <ShineBorder
                 borderWidth={3}
-                className="cursor-pointer h-auto w-auto p-0 bg-white/5 backdrop-blur-md dark:bg-black/5"
+                className="border cursor-pointer h-auto w-auto p-2 bg-white/5 backdrop-blur-md dark:bg-black/5"
                 color={["#FF007F", "#39FF14", "#00FFFF"]}
               >
-                <Button size="lg" className="w-full rounded-xl bg-blue-500 hover:bg-blue-600">
-                  View Events <ArrowRight className="ml-2" size={20} />
+                <Button className="w-full rounded-xl" >
+                  View events <ArrowRight className="ml-2" size={20} />
                 </Button>
               </ShineBorder>
             </Link> 

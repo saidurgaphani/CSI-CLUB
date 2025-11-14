@@ -27,6 +27,30 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      keyframes: {
+        "pulse-slow": {
+            '0%, 100%': {
+                transform: 'translateX(-100%)',
+            },
+            '50%': {
+                transform: 'translateX(100%)',
+            },
+        },
+        "shine-pulse": {
+          "0%": {
+            "background-position": "0% 0%",
+          },
+          "50%": {
+            "background-position": "100% 100%",
+          },
+          to: {
+            "background-position": "0% 0%",
+          },
+        },
+      },
+      animation: {
+        "pulse-slow": "pulse-slow 3s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

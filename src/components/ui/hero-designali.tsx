@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "../../lib/utils";
+import { ReactTyped } from "react-typed";
 
 // @ts-ignore
 function n(e) {
@@ -235,8 +236,6 @@ const renderCanvas = function () {
   });
   resizeCanvas();
 };
-
-import { ReactTyped } from "react-typed";
 
 interface TypeWriterProps {
   strings: string[];
