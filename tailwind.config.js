@@ -10,11 +10,11 @@ export default {
         primary: '#6366f1', // Indigo-500
         secondary: '#a5b4fc', // Indigo-300
         accent: '#f472b6', // Pink-400
-        background: '#f9fafb', // Gray-50
+        background: '#e5e7eb', // Gray-200
         surface: '#ffffff', // White
         text: '#1e293b', // Gray-800
         textSecondary: '#4b5563', // Gray-600
-        border: '#e5e7eb', // Gray-200
+        border: '#d1d5db', // Gray-300
         success: '#16a34a', // Green-500
         warning: '#d97706', // Yellow-500
         error: '#dc2626', // Red-500

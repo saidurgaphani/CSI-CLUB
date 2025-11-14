@@ -105,14 +105,14 @@ const HomePage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-background text-text pt-14"
+      className="min-h-screen bg-gradient-to-b from-background to-surface text-text pt-14"
     >
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">
         <img
-          src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="CSI Club Hero"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
         <div className="relative z-10 p-4 max-w-4xl mx-auto">
