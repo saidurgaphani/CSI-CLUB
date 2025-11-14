@@ -10,7 +10,7 @@ const EventsPage: React.FC = () => {
   const sortedEvents = [...events].sort((a, b) => {
     const dateA = new Date(a.date).getTime();
     const dateB = new Date(b.date).getTime();
-    return dateA - dateB; // Sort ascending by date
+    return dateB - dateA; // Sort ascending by date
   });
 
   const filteredEvents = sortedEvents.filter(event => {

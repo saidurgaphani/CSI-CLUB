@@ -4,26 +4,23 @@ import { ArrowRight } from 'lucide-react';
 import EventCard from '../components/EventCard';
 import { motion } from 'framer-motion';
 import { supabase } from '../supabaseClient';
+import { useInView } from 'react-intersection-observer';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const HomePage: React.FC = () => {
   const [events, setEvents] = useState([]);
   const [clubSettings, setClubSettings] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loadingEvents, setLoadingEvents] = useState(false);
+  const [eventsError, setEventsError] = useState(null);
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
+    const fetchClubSettings = async () => {
       try {
-        const { data: eventsData, error: eventsError } = await supabase
-          .from('events')
-          .select('*')
-          .order('date', { ascending: true });
-
-        if (eventsError) throw eventsError;
-        setEvents(eventsData || []);
-
         const { data: settingsData, error: settingsError } = await supabase
           .from('club_settings')
           .select('*')
@@ -54,19 +51,41 @@ const HomePage: React.FC = () => {
           });
         }
       } catch (err: any) {
-        console.error('Error fetching data:', err.message);
-        setError(err.message || 'An unknown error occurred');
-      } finally {
-        setLoading(false);
+        console.error('Error fetching club settings:', err.message);
       }
     };
 
-    fetchData();
+    fetchClubSettings();
   }, []);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      if (inView) {
+        setLoadingEvents(true);
+        setEventsError(null);
+        try {
+          const { data: eventsData, error: eventsError } = await supabase
+            .from('events')
+            .select('*')
+            .order('date', { ascending: false });
+
+          if (eventsError) throw eventsError;
+          setEvents(eventsData || []);
+        } catch (err: any) {
+          console.error('Error fetching events:', err.message);
+          setEventsError(err.message || 'An unknown error occurred');
+        } finally {
+          setLoadingEvents(false);
+        }
+      }
+    };
+
+    fetchEvents();
+  }, [inView]);
 
   const upcomingEvents = events
     .filter(event => event.status === 'upcoming')
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
   const containerVariants = {
@@ -83,22 +102,6 @@ const HomePage: React.FC = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background text-text pt-24 flex items-center justify-center">
-        <p className="text-xl text-textSecondary">Loading club data...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-background text-text pt-24 flex items-center justify-center">
-        <p className="text-xl text-error">Error: {error}</p>
-      </div>
-    );
-  }
 
   return (
     <motion.div
@@ -190,7 +193,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Upcoming Events Highlight */}
-      <section className="bg-surface py-16 md:py-24 border-t border-border">
+      <section ref={ref} className="bg-surface py-16 md:py-24 border-t border-border">
         <div className="container mx-auto px-4">
           <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-text mb-4 bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary">
@@ -200,7 +203,12 @@ const HomePage: React.FC = () => {
               Don't miss out on our exciting upcoming events! Mark your calendars and get ready to learn, compete, and connect.
             </p>
           </motion.div>
-          {upcomingEvents.length > 0 ? (
+
+          {loadingEvents ? (
+            <LoadingSpinner />
+          ) : eventsError ? (
+            <p className="text-center text-error text-xl py-10">Error: {eventsError}</p>
+          ) : upcomingEvents.length > 0 ? (
             <motion.div
               variants={containerVariants}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -214,6 +222,7 @@ const HomePage: React.FC = () => {
               No upcoming events scheduled at the moment. Stay tuned!
             </motion.p>
           )}
+
           <motion.div variants={itemVariants} className="text-center mt-12">
             <Link
               to="/events"
