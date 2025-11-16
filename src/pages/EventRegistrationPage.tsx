@@ -134,14 +134,36 @@ const EventRegistrationPage: React.FC = () => {
     if (window.history.state && window.history.state.idx > 0) {
       navigate(-1);
     } else {
-      navigate('/events');
+      navigate('/');
     }
   };
 
   const prepareIframeHTML = (iframeString: string | null): string => {
     if (!iframeString) return '';
-    // Add an ID and disable scrolling to prevent double scrollbars
-    return iframeString.replace(/<iframe/g, '<iframe id="registration-iframe" scrolling="no">');
+    
+    // Add an ID, default width/height, and set scrolling to auto (or remove it)
+    let modifiedIframeString = iframeString;
+
+    if (!modifiedIframeString.includes('id="registration-iframe"')) {
+      modifiedIframeString = modifiedIframeString.replace(/<iframe/, '<iframe id="registration-iframe"');
+    }
+
+    // Ensure width and height are set for initial visibility
+    if (!modifiedIframeString.includes('width=')) {
+      modifiedIframeString = modifiedIframeString.replace(/<iframe(.*?)>/, '<iframe$1 width="100%" >');
+    }
+    if (!modifiedIframeString.includes('height=')) {
+      modifiedIframeString = modifiedIframeString.replace(/<iframe(.*?)>/, '<iframe$1 height="600px" >'); // Default height
+    }
+
+    // Set scrolling to auto or remove the attribute entirely
+    modifiedIframeString = modifiedIframeString.replace(/scrolling=\".*?\"/, 'scrolling="auto"');
+    // If scrolling attribute is not present, add it with auto
+    if (!modifiedIframeString.includes('scrolling=')){
+        modifiedIframeString = modifiedIframeString.replace(/<iframe(.*?)>/, '<iframe$1 scrolling="auto">');
+    }
+    
+    return modifiedIframeString;
   }
 
   if (loading) {
@@ -198,7 +220,7 @@ const EventRegistrationPage: React.FC = () => {
         .iframe-container iframe {
           width: 100%;
           border: 0;
-          min-height: 120vh; /* A generous fallback min-height */
+          min-height: 600px; /* A generous fallback min-height */
         }
       `}</style>
       <motion.div
@@ -224,12 +246,12 @@ const EventRegistrationPage: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
           onClick={handleBack}
-          className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 bg-surface/80 backdrop-blur-md hover:bg-surface border border-border rounded-xl px-3 py-2 sm:px-4 text-sm sm:text-base text-textSecondary hover:text-text transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+          className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 bg-surface/80 backdrop-blur-md hover:bg-surface border border-border rounded-xl px-3 py-2 sm:px-4 text-sm sm:text-base text-textSecondary hover:text-text transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
         >
           <ArrowLeft size={18} /> Back
         </motion.button>
 
-        <div className="container mx-auto px-4 py-20 sm:py-24 relative z-10">
+        <div className="container mx-auto px-4 pt-[70px] pb-20 sm:py-24 relative z-10">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -357,7 +379,7 @@ const EventRegistrationPage: React.FC = () => {
               >
                 <p className="text-textSecondary text-lg">
                   Registration form will be available soon. Please check back later.
-                </p>x
+                </p>
               </motion.div>
             )}
           </motion.div>
