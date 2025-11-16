@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Loader2, Calendar, MapPin, Sparkles } from 'lucide-react';
@@ -24,6 +24,7 @@ const EventRegistrationPage: React.FC = () => {
   const [eventDetails, setEventDetails] = useState<EventDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const iframeRef = useRef<HTMLDivElement>(null);
 
   const pageVariants = {
     initial: { opacity: 0 },
@@ -96,6 +97,39 @@ const EventRegistrationPage: React.FC = () => {
     fetchEventDetails();
   }, [eventId]);
 
+  useEffect(() => {
+    const handleIframeResize = (event: MessageEvent) => {
+      let height;
+      try {
+        const data = JSON.parse(event.data);
+        if (data && data.type === 'setHeight' && data.height) {
+          height = data.height + 20;
+        } else if (typeof data === 'object' && data.iframeHeight) {
+          height = data.iframeHeight;
+        }
+      } catch (e) {
+        const match = event.data.toString().match(/^[frameHeight]x?(\d+)/);
+        if (match) {
+          height = parseInt(match[1], 10);
+        }
+      }
+
+      if (height && iframeRef.current) {
+        const iframe = iframeRef.current.querySelector('iframe');
+        if (iframe) {
+          iframe.style.height = `${height}px`;
+        }
+      }
+    };
+
+    window.addEventListener('message', handleIframeResize);
+
+    return () => {
+      window.removeEventListener('message', handleIframeResize);
+    };
+  }, []);
+
+
   const handleBack = () => {
     if (window.history.state && window.history.state.idx > 0) {
       navigate(-1);
@@ -103,6 +137,12 @@ const EventRegistrationPage: React.FC = () => {
       navigate('/events');
     }
   };
+
+  const prepareIframeHTML = (iframeString: string | null): string => {
+    if (!iframeString) return '';
+    // Add an ID and disable scrolling to prevent double scrollbars
+    return iframeString.replace(/<iframe/g, '<iframe id="registration-iframe" scrolling="no">');
+  }
 
   if (loading) {
     return (
@@ -155,24 +195,10 @@ const EventRegistrationPage: React.FC = () => {
   return (
     <>
       <style>{`
-        .iframe-container {
-          position: relative;
-          overflow: hidden;
-          width: 100%;
-          padding-top: 120%; /* 5:6 aspect ratio */
-        }
-        @media (min-width: 768px) {
-          .iframe-container {
-            padding-top: 75%; /* 4:3 aspect ratio */
-          }
-        }
         .iframe-container iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
           width: 100%;
-          height: 100%;
           border: 0;
+          min-height: 120vh; /* A generous fallback min-height */
         }
       `}</style>
       <motion.div
@@ -319,8 +345,9 @@ const EventRegistrationPage: React.FC = () => {
                   <p className="text-textSecondary text-sm sm:text-base">Please fill out the form below to register for this event</p>
                 </div>
                 <div
+                  ref={iframeRef}
                   className="iframe-container"
-                  dangerouslySetInnerHTML={{ __html: eventDetails.iframe }}
+                  dangerouslySetInnerHTML={{ __html: prepareIframeHTML(eventDetails.iframe) }}
                 />
               </motion.div>
             ) : (
@@ -330,7 +357,7 @@ const EventRegistrationPage: React.FC = () => {
               >
                 <p className="text-textSecondary text-lg">
                   Registration form will be available soon. Please check back later.
-                </p>
+                </p>x
               </motion.div>
             )}
           </motion.div>
