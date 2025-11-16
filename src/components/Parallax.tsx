@@ -34,7 +34,11 @@ export const Parallax = ({
   return (
     <motion.div
       ref={ref}
-      style={{ y }}
+      style={{ 
+        y,
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+      }}
       className={className}
     >
       {children}
@@ -72,7 +76,12 @@ export const ParallaxImage = ({
       <motion.img
         src={src}
         alt={alt}
-        style={{ y, opacity }}
+        style={{ 
+          y, 
+          opacity,
+          willChange: 'transform, opacity',
+          transform: 'translateZ(0)',
+        }}
         className="w-full h-[120%] object-cover"
       />
     </div>
@@ -107,7 +116,12 @@ export const ParallaxSection = forwardRef<HTMLElement, ParallaxSectionProps>(({
   return (
     <motion.section
       ref={ref}
-      style={{ y, opacity }}
+      style={{ 
+        y, 
+        opacity,
+        willChange: 'transform, opacity',
+        transform: 'translateZ(0)',
+      }}
       className={className}
     >
       {children}

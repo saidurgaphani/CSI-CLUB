@@ -74,12 +74,114 @@ const HomePage: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen text-text"
+      className="min-h-screen text-text relative overflow-hidden"
     >
+      {/* Enhanced Background Elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
+        {/* Animated Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-accent/5 to-secondary/10"></div>
+        
+        {/* Animated Blob Shapes - Optimized with GPU acceleration */}
+        <motion.div
+          className="absolute top-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-20 w-80 h-80 bg-accent/20 rounded-full blur-3xl"
+          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-1/4 w-72 h-72 bg-secondary/20 rounded-full blur-3xl"
+          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+          animate={{
+            x: [0, 60, 0],
+            y: [0, -40, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/3 w-64 h-64 bg-primary/15 rounded-full blur-3xl"
+          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
+        />
+
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.08] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_40%,transparent_100%)]"></div>
+        
+        {/* Animated Mesh Gradient */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
+          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-secondary/10 via-transparent to-primary/10"></div>
+        </div>
+
+        {/* Floating Particles Effect - Optimized */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/30 rounded-full"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + i * 10}%`,
+              willChange: 'transform, opacity',
+              transform: 'translateZ(0)',
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.3,
+            }}
+          />
+        ))}
+      </div>
+
       <Hero />
 
       {/* About Section */}
-      <ParallaxSection className="container mx-auto px-4 py-16 md:py-24" speed={0.5}>
+      <ParallaxSection className="container mx-auto px-4 py-16 md:py-24 relative z-10" speed={0.5}>
         <Parallax speed={0.8} direction="up">
           <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-text mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
@@ -120,7 +222,7 @@ const HomePage: React.FC = () => {
       </ParallaxSection>
 
       {/* Upcoming Events Highlight */}
-      <ParallaxSection ref={ref} className="bg-surface py-16 md:py-24 border-t border-border" speed={0.4}>
+      <ParallaxSection ref={ref} className="bg-surface/80 backdrop-blur-sm py-16 md:py-24 border-t border-border relative z-10" speed={0.4}>
         <div className="container mx-auto px-4">
           <Parallax speed={0.7} direction="up">
             <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12">

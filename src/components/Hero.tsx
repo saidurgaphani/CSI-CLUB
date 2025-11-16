@@ -105,9 +105,45 @@ export const Hero = () => {
   };
 
   return (
-    <main className="overflow-hidden h-screen">
-    <section id="home" className="h-full flex items-center justify-center">
-   <div className="absolute inset-0 max-md:hidden top-[400px] -z-10 h-[400px] w-full bg-transparent bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,#a8a29e_1px,transparent_1px),linear-gradient(to_bottom,#a8a29e_1px,transparent_1px)]"></div>
+    <main className="overflow-hidden h-screen relative">
+    <section id="home" className="h-full flex items-center justify-center relative z-10">
+      {/* Enhanced Hero Background */}
+      <div className="absolute inset-0 -z-10">
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 max-md:hidden top-[400px] h-[400px] w-full bg-transparent bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,#a8a29e_1px,transparent_1px),linear-gradient(to_bottom,#a8a29e_1px,transparent_1px)]"></div>
+        
+        {/* Animated Orbs - Optimized */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/15 rounded-full blur-2xl"
+          style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/15 rounded-full blur-2xl"
+          style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
       <motion.div 
         className="flex flex-col items-center justify-center px-6 text-center lg:mt-10"
         variants={containerVariants}
