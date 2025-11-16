@@ -1,92 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9fafb; /* Ensure background color matches theme */
+  color: #1e293b; /* Ensure default text color matches theme */
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      background-color: #f9fafb; /* Ensure background color matches theme */
-      color: #1e293b; /* Ensure default text color matches theme */
-      overflow-x: hidden;
-    }
+/* Custom scrollbar for a sleek look */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-    * {
-      -webkit-tap-highlight-color: transparent;
-    }
+::-webkit-scrollbar-track {
+  background: #ffffff; /* surface color */
+  border-radius: 10px;
+}
 
-    /* Custom scrollbar for a sleek look */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
+::-webkit-scrollbar-thumb {
+  background: #6366f1; /* primary color */
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
 
-    ::-webkit-scrollbar-track {
-      background: #ffffff; /* surface color */
-      border-radius: 10px;
-    }
+::-webkit-scrollbar-thumb:hover {
+  background: #a5b4fc; /* secondary color on hover */
+}
 
-    ::-webkit-scrollbar-thumb {
-      background: #6366f1; /* primary color */
-      border-radius: 10px;
-      transition: background 0.3s ease;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #a5b4fc; /* secondary color on hover */
-    }
-
-    @keyframes shine {
-      0% {
-        transform: translateX(-100%);
-      }
-      50% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    .iframe-container {
-      width: 100%;
-      height: 100vh; /* Use 100vh for full viewport height */
-      border-radius: 16px;
-      overflow: hidden; /* Important to clip the rounded corners */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 16px;
-      margin: 16px;
-    }
-
-    .iframe-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none; /* Remove default iframe border */
-      overflow: hidden; /* Hide any potential scrollbars within the iframe */
-    }
-
-    .details-text {
-      line-height: 1.4; /* Adjust this value to control the spacing */
-    }
-
-    /* Smooth scrolling performance optimizations */
-    @media (prefers-reduced-motion: no-preference) {
-      html {
-        scroll-behavior: smooth;
-      }
-    }
-
-    /* Optimize rendering for smooth scrolling */
-    .parallax-container,
-    [class*="motion"] {
-      will-change: transform;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      perspective: 1000px;
-    }
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

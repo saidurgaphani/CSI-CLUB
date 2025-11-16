@@ -50,6 +50,10 @@ export default {
       },
       animation: {
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
+        "shine-pulse": "shine-pulse 14s linear infinite",
+      },
+      backgroundSize: {
+        'shine-size': '300% 300%',
       },
     },
   },

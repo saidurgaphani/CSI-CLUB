@@ -11,11 +11,11 @@ import { Button } from "./ui/button";
 
 export const Hero = () => {
   const talkAbout = [
-    "Building tech",
+    "building tech",
     "shaping minds",
     "inspiring innovation—together",
     "collaboration—unleashed",
-    "Empowering minds",
+    "empowering minds",
     "building the future",
     
   ];
@@ -110,10 +110,10 @@ export const Hero = () => {
       {/* Enhanced Hero Background */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div> */}
         
         {/* Grid Pattern */}
-        <div className="absolute inset-0 max-md:hidden top-[400px] h-[400px] w-full bg-transparent bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,#a8a29e_1px,transparent_1px),linear-gradient(to_bottom,#a8a29e_1px,transparent_1px)]"></div>
+        {/* <div className="absolute inset-0 max-md:hidden top-[400px] h-[400px] w-full bg-transparent bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,#a8a29e_1px,transparent_1px),linear-gradient(to_bottom,#a8a29e_1px,transparent_1px)]"></div> */}
         
         {/* Animated Orbs - Optimized */}
         <motion.div
@@ -276,7 +276,7 @@ export const Hero = () => {
                   className="border cursor-pointer h-auto w-auto p-2 bg-white/5 backdrop-blur-md dark:bg-black/5"
                   color={["#FF007F", "#39FF14", "#00FFFF"]}
                 >
-                  <Button className="w-full rounded-xl" >
+                  <Button className="w-full rounded-xl text-white" >
                     View events <ArrowRight className="ml-2" size={20} />
                   </Button>
                 </ShineBorder>
