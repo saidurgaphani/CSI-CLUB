@@ -1,8 +1,9 @@
-import { Home, CalendarDays, Users, Mail } from 'lucide-react';
+import { Home, CalendarDays, Users, Mail, User } from 'lucide-react';
 
 export const navLinks = [
   { name: 'Home', path: '/', icon: Home },
   { name: 'Events', path: '/events', icon: CalendarDays },
+  { name: 'Members', path: '/members', icon: User },
   { name: 'Join', path: '/join', icon: Users },
   { name: 'Contact', path: '/contact', icon: Mail },
 ];

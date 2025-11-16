@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface EventCardProps {
   event: {
@@ -16,6 +17,7 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  const navigate = useNavigate();
   const eventDate = new Date(event.date);
   const formattedDate = eventDate.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -31,6 +33,10 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const handleRegisterClick = () => {
+    navigate(`/register?eventId=${event.id}`);
   };
 
   return (
@@ -67,16 +73,14 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           <span>{event.venue}</span>
         </div>
         {event.status === 'upcoming' && (
-          <motion.a
-            href={event.form_link}
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.button
+            onClick={handleRegisterClick}
             className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary/80 transition-all duration-300 shadow-lg hover:shadow-primary/50"
             whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(158, 127, 255, 0.4)" }}
             whileTap={{ scale: 0.95 }}
           >
             Register Now
-          </motion.a>
+          </motion.button>
         )}
       </div>
     </motion.div>
