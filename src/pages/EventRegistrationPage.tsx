@@ -153,7 +153,7 @@ const EventRegistrationPage: React.FC = () => {
       modifiedIframeString = modifiedIframeString.replace(/<iframe(.*?)>/, '<iframe$1 width="100%" >');
     }
     if (!modifiedIframeString.includes('height=')) {
-      modifiedIframeString = modifiedIframeString.replace(/<iframe(.*?)>/, '<iframe$1 height="600px" >'); // Default height
+      modifiedIframeString = modifiedIframeString.replace(/<iframe(.*?)>/, '<iframe$1 height="700px" >'); // Default height
     }
 
     // Set scrolling to auto or remove the attribute entirely
@@ -264,31 +264,38 @@ const EventRegistrationPage: React.FC = () => {
                 variants={itemVariants}
                 className="bg-surface/80 backdrop-blur-xl rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl border border-border/50 mb-8"
               >
-                <div className="flex flex-wrap md:flex-nowrap items-start justify-between gap-4 mb-6">
-                  <div className="w-full md:w-auto">
-                    <motion.h1
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="text-2xl sm:text-3xl md:text-4xl font-bold text-text mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
-                    >
-                      {eventDetails.title || 'Event Registration'}
-                    </motion.h1>
-                    {eventDetails.description && (
-                      <p className="text-textSecondary text-base sm:text-lg whitespace-pre-line" style={{ whiteSpace: 'pre-line', lineHeight: '1.6' }}>
-                        {eventDetails.description}
-                      </p>
-                    )}
-                  </div>
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.4, type: "spring" }}
-                    className="flex-shrink-0 ml-auto"
-                  >
-                    <Sparkles className="w-12 h-12 sm:w-16 sm:h-16 text-primary/20" />
-                  </motion.div>
-                </div>
+                <div className="relative flex flex-wrap md:flex-nowrap items-start justify-between gap-4 mb-6">
+  <div className="w-full md:w-auto">
+    <motion.h1
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+      className="text-2xl sm:text-3xl md:text-4xl font-bold text-text mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
+    >
+      {eventDetails.title || 'Event Registration'}
+    </motion.h1>
+
+    {eventDetails.description && (
+      <p
+        className="text-textSecondary text-base sm:text-lg whitespace-pre-line"
+        style={{ whiteSpace: 'pre-line', lineHeight: '1.6' }}
+      >
+        {eventDetails.description}
+      </p>
+    )}
+  </div>
+
+  {/* Sparkles fixed at top-right */}
+  <motion.div
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ delay: 0.4, type: "spring" }}
+    className="absolute top-0 right-0"
+  >
+    <Sparkles className="w-12 h-12 sm:w-16 sm:h-16 text-primary/20" />
+  </motion.div>
+</div>
+
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                   {eventDetails.date && (
